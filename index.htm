@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div>
+<canvas id="myCanvas" width="250" height="250" style="border:1px solid #c3c3c3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+<canvas id="canvas" width="400" height="350" style="border:1px solid #c3c3c3;">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+<div>
+<input id="1" type="number" value="10"> <br /><br />
+<input id="2" type="number" value="20"> <br /><br />
+<input id="3" type="number" value="30"> <br /><br />
+<input id="4" type="number" value="40"> <br /><br />
+<button onclick="myFunction()">KIRAJZOL</button>
+</div>
+</div>
+<script>
+var canv = document.getElementById("myCanvas");
+var ctx = canv.getContext("2d");
+ctx.moveTo(20,20);
+ctx.lineTo(20,230);
+var ctx2 = canv.getContext("2d");
+ctx2.moveTo(20,230);
+ctx2.lineTo(230,230);
+ctx.stroke();
+ctx2.stroke();
+
+function myFunction() {
+
+var a = document.getElementById("1").value;
+var b = document.getElementById("2").value;
+var c = document.getElementById("3").value;
+var d = document.getElementById("4").value;
+var myColor = ["#FF0000","#FFFF00","#00FF00","#00FFFF"];
+var myData = [Number(a),Number(b),Number(c),Number(d)];
+
+function getTotal(){
+var myTotal = 0;
+for (var j = 0; j < myData.length; j++) {
+myTotal += myData[j];
+}
+return myTotal;
+}
+
+function plotData() {
+var canvas;
+var ctx7;
+var lastend = 0;
+var myTotal = getTotal();
+
+canvas = document.getElementById("canvas");
+ctx7 = canvas.getContext("2d");
+ctx7.clearRect(0, 0, canvas.width, canvas.height);
+
+for (var i = 0; i < myData.length; i++) {
+ctx7.fillStyle = myColor[i];
+ctx7.beginPath();
+ctx7.moveTo(200,190);
+ctx7.arc(200,190,150,lastend,lastend+
+  (Math.PI*2*(myData[i]/myTotal)),false);
+ctx7.lineTo(200,190);
+ctx7.fill();
+lastend += Math.PI*2*(myData[i]/myTotal);
+var ctx8 = canvas.getContext("2d");
+ctx8.fillStyle = "#000000";
+ctx8.font = "20px Arial";
+ctx8.fillText("Grafikon 2",155,20);
+}
+}
+plotData();
+ctx.clearRect(21, 21, 228, 208);
+ctx.font = "16px Arial";
+ctx.fillText("Grafikon 1",100,50);
+var ctx3 = canv.getContext("2d");
+ctx3.fillStyle = "#FF0000";
+ctx3.fillRect(40,229-a,20,a);
+ctx3.font = "16px Arial";
+ctx3.fillText(a,40,250);
+var ctx4 = canv.getContext("2d");
+ctx4.fillStyle = "#FFFF00";
+ctx4.fillRect(80,229-b,20,b);
+ctx4.font = "16px Arial";
+ctx4.fillText(b,80,250);
+var ctx5 = canv.getContext("2d");
+ctx5.fillStyle = "#00FF00";
+ctx5.fillRect(120,229-c,20,c);
+ctx5.font = "16px Arial";
+ctx5.fillText(c,120,250);
+var ctx6 = canv.getContext("2d");
+ctx6.fillStyle = "#00FFFF";
+ctx6.fillRect(160,229-d,20,d);
+ctx6.font = "16px Arial";
+ctx6.fillText(d,160,250);
+
+}
+</script>
+
+
+</body>
+</html>
